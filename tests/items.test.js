@@ -11,7 +11,7 @@ let itemId;
 // Connexion à une base de données de test
 beforeAll(async () => {
     await mongoose.disconnect();
-    await mongoose.connect(process.env.MONGO_URI_TEST, {
+    await mongoose.connect("mongodb://localhost:27017/datas_test", {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     });
