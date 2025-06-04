@@ -1,0 +1,42 @@
+# .github/workflows/main.yml
+name: Node.js CI/CD
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Set up MongoDB
+      uses: supercharge/mongodb-github-action@1.10.0
+      with:
+        mongodb-version: 6.0 # Ou la version de MongoDB que tu utilises
+
+    - name: Set up environment variables
+      run: |
+        echo "MONGO_URI=mongodb://localhost:27017/datas_test" >> $GITHUB_ENV
+        echo "JWT_SECRET=githubactionssecretkey" >> $GITHUB_ENV
+        echo "JWT_EXPIRES_IN=1h" >> $GITHUB_ENV
+
+    - name: Run tests
+      run: npm test

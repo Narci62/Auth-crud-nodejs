@@ -1,0 +1,28 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      NODE_ENV: development
+      MONGO_URI: mongodb://mongo:27017/datas
+      JWT_SECRET: supersecretkey
+      JWT_EXPIRES_IN: 1h
+    depends_on:
+      - mongo
+    volumes:
+      - .:/app # Monte le répertoire courant dans le conteneur pour le développement (hot-reloading)
+      - /app/node_modules # Empêche le remplacement de node_modules par le volume
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db # Persiste les données MongoDB
+
+volumes:
+  mongo-data:
