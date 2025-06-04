@@ -26,5 +26,40 @@ Une API RESTful développée avec **Node.js**, **Express** et **MongoDB**, perme
 ---
 
 ## 📁 Structure du projet
+📦 project/
+├── controllers/
+│ ├── authController.js
+│ └── itemController.js
+├── middlewares/
+│ └── protect.js
+├── models/
+│ ├── User.js
+│ └── Item.js
+├── routes/
+│ ├── authRoutes.js
+│ └── itemRoutes.js
+├── tests/
+│ ├── auth.test.js
+│ └── item.test.js
+├── .env
+├── app.js
+├── server.js
+└── README.md
+
+
+---
+
+## 📦 Installation
+
+1. **Cloner le projet**
+```bash
+git clone https://github.com/Narci62/Auth-crud-nodejs.git
+cd Auth-crud-nodejs
+```
+
+2. **Installer les dépendances**
+```bash
+npm install
+
 
 
